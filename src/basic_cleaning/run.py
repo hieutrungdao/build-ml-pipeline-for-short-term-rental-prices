@@ -22,10 +22,10 @@ def go(args):
     artifact_local_path = run.use_artifact(args.input_artifact).file()
     df = pd.read_csv(artifact_local_path, index_col="id")
 
-    # # Fix boundaries
-    # logger.info("Remove outliers by longitude and latitude")
-    # idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
-    # df = df[idx].copy()
+    # Fix boundaries
+    logger.info("Remove outliers by longitude and latitude")
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
 
     logger.info("Remove outliers by price")
     idx = df['price'].between(args.min_price, args.max_price)
